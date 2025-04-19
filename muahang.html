@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Trang chủ</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Twinkle+Star&display=swap&subset=vietnamese" rel="stylesheet">
+
+  <style>
+   * {
+      box-sizing: border-box;
+      font-family: 'Twinkle Star', sans-serif;
+    }
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: url("tường đỏ 1.png") no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 30px;
+      background-color: #c30a07;
+      box-shadow: 0 8px 15px #c30a07;
+      position: relative;
+      z-index: 1000;
+    }
+
+    .logo img {
+      height: 40px;
+    }
+
+     .search-bar {
+  display: flex;
+  justify-content: center;
+}
+
+.search-bar form {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden; /* Làm liền khối */
+  background-color: white;
+}
+
+.search-bar input[type="text"] {
+  width: 30rem;
+  padding: 10px 12px;
+  font-size: 16px;
+  border: none;
+  outline: none;
+}
+
+.search-bar button {
+  padding: 0 16px;
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+    .filter-btn {
+      margin-left: 10px;
+      background-color: #ffa500;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #0a0a23;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #f60;
+    }
+
+    .menu {
+      position: relative;
+    }
+
+    .dropdown {
+      display: none;
+      position: absolute;
+      background-color: white;
+      box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+      min-width: 160px;
+      z-index: 1;
+    }
+
+    .dropdown a {
+      display: block;
+      padding: 12px 16px;
+      color: black;
+      text-decoration: none;
+    }
+
+    .dropdown a:hover {
+      background-color: #f1f1f1;
+    }
+
+    .menu:hover .dropdown {
+      display: block;
+    }
+
+    .advanced-filter {
+  background: #fff0f5;
+  border: 2px solid #ffb6c1;
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin: 20px auto;
+  width: 90%;
+  max-width: 700px;
+  box-shadow: 0 4px 8px rgba(255, 182, 193, 0.2);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.advanced-filter h4 {
+  width: 100%;
+  font-size: 18px;
+  font-weight: bold;
+  color: #cc3366;
+  margin-bottom: 0;
+}
+
+.advanced-filter label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+}
+
+.sort-options,
+.type-options {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.apply-filter {
+  background-color: #ff69b4;
+  color: white;
+  padding: 8px 16px;
+  font-size: 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  align-self: flex-end;
+}
+
+.apply-filter:hover {
+  background-color: #ff1493;
+}
+
+@media (max-width: 600px) {
+  .advanced-filter {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .sort-options,
+  .type-options,
+  .apply-filter {
+    width: 100%;
+  }
+}
+
+
+.filter-icon {
+  background-color: #ff69b4;
+  color: white;
+  font-size: 16px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+ 
+  box-shadow: 0 2px 6px rgba(255, 105, 180, 0.4);
+  transition: background-color 0.3s ease;
+}
+.filter-icon:hover {
+  background-color: #ff1493;
+}
+
+/* Popup bộ lọc */
+.modal-popup {
+  display: none;
+  position: fixed;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.95);
+  opacity: 0;
+  transition: all 0.3s ease;
+  background: #fff0f5;
+  border: 2px solid #ffb6c1;
+  border-radius: 16px;
+  padding: 20px;
+  width: 90%;
+  max-width: 500px;
+  z-index: 999;
+  box-shadow: 0 12px 24px rgba(255, 182, 193, 0.4);
+}
+
+/* Khi bật */
+.modal-popup.show {
+  display: block;
+  transform: translate(-50%, 0%) scale(1);
+  opacity: 1;
+}
+
+/* Bộ lọc nội dung */
+.modal-popup h4 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #cc3366;
+  margin-bottom: 12px;
+}
+
+.modal-popup label {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+.modal-popup select {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+.modal-popup .apply-filter {
+  background-color: #ff69b4;
+  color: white;
+  padding: 10px 16px;
+  font-size: 15px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  float: right;
+}
+
+.modal-popup .apply-filter:hover {
+  background-color: #ff1493;
+}
+
+
+    @media screen and (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 15px;
+      }
+
+      .search-bar input[type="text"] {
+        width: 100%;
+      }
+
+      .nav-links {
+        justify-content: center;
+        margin-top: 10px;
+      }
+    }
+
+    .grid-candy-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 2rem;
+      
+      padding-left: 6rem;
+      padding-right: 6rem;
+    }
+
+    .card-candy {
+      background: #f78686;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      padding: 12px;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+
+    .card-candy:hover {
+      transform: translateY(-5px);
+    }
+
+
+    .card-candy img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .card-candy h4 {
+      font-size: 16px;
+      margin: 8px 0 4px;
+      
+    }
+
+    .card-candy p {
+      color: #e53935;
+      font-weight: bold;
+      margin-top:2px;
+      
+    }
+
+    @media screen and (max-width: 480px) {
+      .card-candy h4 {
+        font-size: 14px;
+      }
+      .card-candy p {
+        font-size: 13px;
+      }
+    }
+
+    #no-result {
+      display: none;
+      text-align: center;
+      margin-top: 10px;
+      font-weight: bold;
+      color: white;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .section-title {
+  width: 100%;
+  text-align: center;
+  font-size: 22px;
+  margin-top: 3rem;
+  margin-bottom: 1px;
+  grid-column: 1 / -1; /* Cực kỳ quan trọng với grid layout */
+}
+
+.suggestion-wrapper {
+  display: contents; /* để không phá vỡ grid layout, hoặc dùng block nếu bạn đang không dùng grid */
+}
+
+.card-candy {
+  border: 2px solid transparent;
+  border-radius: 12px;
+  transition: border 0.3s ease;
+}
+
+
+
+.card-candy.selected {
+  border: 3px solid #b71c1c !important; /* đỏ quý phái */
+  box-shadow: 0 0 10px rgba(183, 28, 28, 0.5); /* ánh sáng đỏ đậm */
+  border-radius: 12px;
+}
+
+
+.marquee {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 10px 0;
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 5px; /* chỉnh giảm ở đây */
+}
+
+.marquee-track {
+  display: flex;
+  width: fit-content;
+  animation: scrollLoop 20s linear infinite;
+}
+
+.marquee-content {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  padding-right: 4rem;
+  gap: 1rem;
+}
+
+.spacer {
+  display: inline-block;
+  width: 6rem; /* khoảng cách giữa 2 phần nội dung */
+}
+
+/* Chạy mượt từ phải sang trái */
+@keyframes scrollLoop {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Hiệu ứng nhấp nháy */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.blink {
+  animation: blink 2s infinite;
+}
+
+
+
+
+
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <div class="logo">
+      <a href="TRANG CHỦ Ở ĐÂY.html"><img src="Screenshot 2025-04-11 135054.png" alt="Logo"></a>
+    </div>
+
+    <div class="search-bar">
+      <form action="muahang.html" method="get">
+        <input type="text" id="search-input" name="query" placeholder="Tìm kiếm..." autocomplete="off">
+        <button type="submit">🔎</button>
+      </form>
+    </div>
+
+    <button id="toggle-filter" class="filter-icon" title="Bộ lọc">
+  🔍 Bộ lọc
+    </button>
+
+    <div class="nav-links">
+      <div class="menu">
+        <a href="cacloaikeo.html">Các loại kẹo</a>
+       <div class="dropdown">
+          <a href="muahang.html?query=kẹo cứng">Kẹo cứng</a>
+          <a href="muahang.html?query=kẹo mềm">Kẹo mềm</a>
+          <a href="muahang.html?query=kẹo socola">Kẹo socola</a>
+          <a href="muahang.html?query=kẹo truyền thống">Kẹo truyền thống</a>
+        </div>
+      </div>
+      <a href="muahang.html">Mua hàng</a>
+      <a href="taikhoan.html">Tài khoản</a>
+      <a href="doitrahang.html">Đổi/Trả hàng</a>
+    </div>
+   
+  </div>
+
+   <div class="marquee blink">
+    <div class="marquee-track">
+      <div class="marquee-content">
+        🎉 Miễn phí đổi trả trong 3 ngày! | 💥 Ưu đãi sốc lên đến 50%! | 🚚 Giao hàng nhanh toàn quốc!
+        <span class="spacer"></span>
+        💖 Click để chọn sản phẩm bạn yêu thích!
+      </div>
+      <!-- Nhân đôi để tạo vòng lặp liên tục -->
+      <div class="marquee-content">
+        🎉 Miễn phí đổi trả trong 3 ngày! | 💥 Ưu đãi sốc lên đến 50%! | 🚚 Giao hàng nhanh toàn quốc!
+        <span class="spacer"></span>
+        💖 Click để chọn sản phẩm bạn yêu thích!
+      </div>
+    </div>
+  </div>
+
+  <div class="advanced-filter modal-popup" id="advanced-filter"style="display: none;">
+  <h4>Bộ lọc sản phẩm:</h4>
+
+  <label>
+    <span>Sắp xếp theo:</span>
+    <select class="sort-options" id="sort-options">
+      <option value="popular">🔝 Độ phổ biến</option>
+      <option value="price-asc">💸 Giá từ thấp đến cao</option>
+      <option value="az">🔤 Từ A đến Z</option>
+    </select>
+  </label>
+
+  <label>
+    <span>Lọc theo loại:</span>
+    <select class="type-options" id="type-options">
+      <option value="all">Tất cả</option>
+      <option value="kẹo cứng">Kẹo cứng</option>
+      <option value="kẹo mềm">Kẹo mềm</option>
+      <option value="kẹo socola">Kẹo socola</option>
+      <option value="kẹo truyền thống">Kẹo truyền thống</option>
+    </select>
+  </label>
+
+  <button class="apply-filter">Áp dụng</button>
+</div>
+
+
+<div id="no-result" style="display: none; padding-top: 5rem; font-size: 2rem">Không tìm thấy sản phẩm phù hợp.</div>
+
+
+
+
+
+
+
+
+  <div class="grid-candy-container" id="product-grid">
+    <div class="card-candy"  data-name="Bánh bèo girly core" data-category="kẹo cứng" data-popular="1" data-price="20000">
+      <img src="kẹo cứng/Bánh bèo girly core.jpg" alt="Bánh bèo girly core">
+      <h4>Bánh bèo girly core</h4>
+      <p>20.000đ</p>
+    </div>
+    <div class="card-candy"  data-name="Dành cho người ghét trái cây" data-category="kẹo cứng" data-popular="1" data-price="30000">
+      <img src="kẹo cứng/Dành cho người ghét trái cây.jpg" alt="Dành cho người ghét trái cây">
+      <h4>Dành cho người ghét trái cây</h4>
+      <p>30.000đ</p>
+    </div>
+    <div class="card-candy"  data-name="Kẹo bài vị" data-category="kẹo cứng" data-popular="1" data-price="25000">
+      <img src="kẹo cứng/Kẹo bài vị.JPG" alt="Kẹo bài vị">
+      <h4>Kẹo bài vị</h4>
+      <p>25.000đ</p>
+    </div>
+    <div class="card-candy"  data-name="Kẹo sakura phiên bản kẹo mút" data-category="kẹo cứng" data-popular="1" data-price="20000">
+      <img src="kẹo cứng/Kẹo sakura phiên bản kẹo mút.jpg" alt="Kẹo sakura phiên bản kẹo mút">
+      <h4>Kẹo sakura phiên bản kẹo mút</h4>
+      <p>20.000đ</p>
+    </div>
+      <div class="card-candy"  data-name="Kẹo sakura vo tròn" data-category="kẹo cứng" data-popular="3" data-price="15000">
+      <img src="kẹo cứng/Kẹo sakura vo tròn.jpg" alt="Kẹo sakura vo tròn">
+      <h4>Kẹo sakura vo tròn</h4>
+      <p>15.000đ</p>
+    </div>
+    <div class="card-candy"  data-name="Mâm ngũ quả cứng" data-category="kẹo cứng" data-popular="5" data-price="25000">
+      <img src="kẹo cứng/Mâm ngũ quả cứng.jpg" alt="Mâm ngũ quả cứng">
+      <h4>Mâm ngũ quả cứng</h4>
+      <p>25.000đ</p>
+    </div>
+    <div class="card-candy"  data-name="tanghulu" data-category="kẹo cứng" data-popular="2" data-price="24000">
+      <img src="kẹo cứng/tanghulu.jpg" alt="tanghulu">
+      <h4>tanghulu</h4>
+      <p>24.000đ</p>
+    </div>
+    <div class="card-candy"  data-name="Tuổi thơ của bạn" data-category="kẹo cứng" data-popular="3" data-price="20000">
+      <img src="kẹo cứng/Tuổi thơ của bạn.jpg" alt="Tuổi thơ của bạn">
+      <h4>Tuổi thơ của bạn</h4>
+      <p>20.000đ</p>
+    </div>
+
+
+    <div class="card-candy"  data-name="Bia đá không phải biadia" data-category="kẹo mềm" data-popular="1" data-price="20000">
+      <img src="kẹo dẻo\Bia đá không phải biadia.jpg" alt="Bia đá không phải biadia">
+      <h4>Bia đá không phải biadia</h4>
+      <p>20.000đ</p>
+    </div>
+    <div class="card-candy"  data-name="Dành cho người không có gấu" data-category="kẹo mềm" data-popular="1" data-price="30000">
+      <img src="kẹo dẻo\Dành cho người không có gấu.jpg" alt="Dành cho người không có gấu">
+      <h4>Dành cho người không có gấu</h4>
+      <p>30.000đ</p>
+    </div>
+    <div class="card-candy"  data-name="Kẹo bài vị" data-category="kẹo mềm" data-popular="1" data-price="25000">
+      <img src="kẹo dẻo\Giống mochi nhưng ko phải mochi.jpg" alt="Giống mochi nhưng ko phải mochi">
+      <h4>Giống mochi nhưng ko phải mochi</h4>
+      <p>25.000đ</p>
+    </div>
+    <div class="card-candy"  data-name="mochi để đĩa" data-category="kẹo mềm" data-popular="1" data-price="20000">
+  <img src="kẹo dẻo/mochi để đĩa.jpg" alt="mochi để đĩa">
+  <h4>mochi để đĩa</h4>
+  <p>20.000đ</p>
+</div>
+
+<div class="card-candy"  data-name="Kẹo bông gòn có cam không tươi" data-category="kẹo mềm" data-popular="1" data-price="20000">
+  <img src="kẹo dẻo/Kẹo bông gòn có cam không tươi.jpg" alt="Kẹo bông gòn có cam không tươi">
+  <h4>Kẹo bông gòn có cam k</h4>
+  <p>20.000đ</p>
+</div>
+
+<div class="card-candy"  data-name="Kẹo bông hoa thật" data-category="kẹo mềm" data-popular="1" data-price="20000">
+  <img src="kẹo dẻo/Kẹo bông hoa thật.jpg" alt="Kẹo bông hoa thật">
+  <h4>Kẹo bông hoa thật</h4>
+  <p>20.000đ</p>
+</div>
+
+<div class="card-candy"  data-name="Kẹo cứng dẻo nhưng không bằng nyc" data-category="kẹo mềm" data-popular="1" data-price="20000">
+  <img src="kẹo dẻo\Kẹo cũng dẻo nhưng không bằng nyc.jpg" alt="Kẹo cứng dẻo nhưng không bằng nyc">
+  <h4>Kẹo cứng dẻo nhưng không bằng nyc</h4>
+  <p>20.000đ</p>
+</div>
+
+<div class="card-candy"  data-name="Kẹo dẻo hơn mềm nyc" data-category="kẹo mềm" data-popular="1" data-price="20000">
+  <img src="kẹo dẻo\Kẹo dẻo hơn mồm nyc.jpg" alt="Kẹo dẻo hơn mềm nyc">
+  <h4>Kẹo dẻo hơn mềm nyc</h4>
+  <p>20.000đ</p>
+</div>
+
+<div class="card-candy"  data-name="Kẹo ngũ hành sơn" data-category="kẹo mềm" data-popular="1" data-price="20000">
+  <img src="kẹo dẻo/Kẹo ngũ hành sơn.jpg" alt="Kẹo ngũ hành sơn">
+  <h4>Kẹo ngũ hành sơn</h4>
+  <p>20.000đ</p>
+</div>
+
+<div class="card-candy"  data-name="Kẹo nougat" data-category="kẹo mềm" data-popular="1" data-price="20000">
+  <img src="kẹo dẻo/Kẹo nougat.jpg" alt="Kẹo nougat">
+  <h4>Kẹo nougat</h4>
+  <p>20.000đ</p>
+</div>
+<div class="card-candy"  data-name="Khi bạn quá thèm noel" data-category="kẹo mềm" data-popular="1" data-price="20000">
+  <img src="kẹo dẻo/Khi bạn quá thèm noel.jpg" alt="Khi bạn quá thèm noel">
+  <h4>Khi bạn quá thèm noel</h4>
+  <p>20.000đ</p>
+</div>
+
+<div class="card-candy"  data-name="Lolipop bản winx" data-category="kẹo mềm" data-popular="1" data-price="20000">
+  <img src="kẹo dẻo/Lolipop bản winx.jpg" alt="Lolipop bản winx">
+  <h4>Lolipop bản winx</h4>
+  <p>20.000đ</p>
+</div>
+
+<div class="card-candy"  data-name="Mâm ngũ quả mềm" data-category="kẹo mềm" data-popular="1" data-price="20000">
+  <img src="kẹo dẻo/Mâm ngũ quả mềm.jpg" alt="Mâm ngũ quả mềm">
+  <h4>Mâm ngũ quả mềm</h4>
+  <p>20.000đ</p>
+</div>
+
+<div class="card-candy"  data-name="Nougat chỉ có dâu" data-category="kẹo mềm" data-popular="1" data-price="20000">
+  <img src="kẹo dẻo/Nougat chỉ có dâu.jpg" alt="Nougat chỉ có dâu">
+  <h4>Nougat chỉ có dâu</h4>
+  <p>20.000đ</p>
+</div>
+
+<div class="card-candy"  data-name="Nougat đủ vị" data-category="kẹo mềm" data-popular="1" data-price="20000">
+  <img src="kẹo dẻo/Nougat đủ vị.jpg" alt="Nougat đủ vị">
+  <h4>Nougat đủ vị</h4>
+  <p>20.000đ</p>
+</div>
+
+<div class="card-candy"  data-name="Nougat trái cây" data-category="kẹo mềm" data-popular="1" data-price="20000">
+  <img src="kẹo dẻo/Nougat trái cây.jpg" alt="Nougat trái cây">
+  <h4>Nougat trái cây</h4>
+  <p>20.000đ</p>
+</div>
+
+<div class="card-candy"  data-name="Thịt xiên nướng bản hàn quốc" data-category="kẹo mềm" data-popular="1" data-price="20000">
+  <img src="kẹo dẻo/Thịt xiên nướng bản hàn quốc.jpg" alt="Thịt xiên nướng bản hàn quốc">
+  <h4>Thịt xiên nướng bản hàn quốc</h4>
+  <p>20.000đ</p>
+</div>
+
+<div class="card-candy"  data-name="Trái cây 3d bóng hơn cả bạn" data-category="kẹo mềm" data-popular="1" data-price="20000">
+  <img src="kẹo dẻo/Trái cây 3d bóng hơn cả bạn.jpg" alt="Trái cây 3d bóng hơn cả bạn">
+  <h4>Trái cây 3d bóng hơn cả bạn</h4>
+  <p>20.000đ</p>
+</div>
+
+<div class="card-candy"  data-name="Xoắn hơn vật lí của bạn" data-category="kẹo mềm" data-popular="1" data-price="20000">
+  <img src="kẹo dẻo/Xoắn hơn vật lí của bạn.jpg" alt="Xoắn hơn vật lí của bạn">
+  <h4>Xoắn hơn vật lí của bạn</h4>
+  <p>20.000đ</p>
+</div>
+
+
+
+<div class="card-candy"  data-name="thanh choco nhiều múi" data-category="kẹo socola" data-popular="1" data-price="20000">
+  <img src="kẹo socola/thanh choco nhiều múi.jpg" alt="thanh choco nhiều múi">
+  <h4>thanh choco nhiều múi</h4>
+  <p>20.000đ</p>
+</div>
+
+<div class="card-candy"  data-name="choco nhái dubai" data-category="kẹo socola" data-popular="1" data-price="20000">
+  <img src="kẹo socola/choco nhái dubai.jpg" alt="choco nhái dubai">
+  <h4>choco nhái dubai</h4>
+  <p>20.000đ</p>
+</div>
+
+<div class="card-candy"  data-name="choco 90%" data-category="kẹo socola" data-popular="1" data-price="20000">
+  <img src="kẹo socola/choco 90%.jpg" alt="choco 90%">
+  <h4>choco 90%</h4>
+  <p>20.000đ</p>
+</div>
+
+<div class="card-candy"  data-name="choco 1000%" data-category="socola" data-popular="1" data-price="20000">
+  <img src="kẹo socola/choco 1000%.jpg" alt="choco 1000%">
+  <h4>choco 1000%</h4>
+  <p>20.000đ</p>
+</div>
+
+<div class="card-candy"  data-name="choco tam vị" data-category="kẹo socola" data-popular="1" data-price="20000">
+  <img src="kẹo socola/choco tam vị.jpg" alt="choco tam vị">
+  <h4>choco tam vị</h4>
+  <p>20.000đ</p>
+</div>
+
+<div class="card-candy"  data-name="choco phú bà" data-category="kẹo socola" data-popular="1" data-price="20000">
+  <img src="kẹo socola/choco phú bà.jpg" alt="choco phú bà">
+  <h4>choco phú bà</h4>
+  <p>20.000đ</p>
+</div>
+
+<div class="card-candy"  data-name="Sôcôla đắng hơn điểm toán" data-category="kẹo socola" data-popular="1" data-price="20000">
+  <img src="kẹo socola/Sôcôla đắng hơn điểm toán.jpg" alt="Sôcôla đắng hơn điểm toán">
+  <h4>Sôcôla đắng hơn điểm toán</h4>
+  <p>20.000đ</p>
+</div>
+
+<div class="card-candy"  data-name="Sôcôla không đắng cũng không ngọt" data-category="kẹo socola" data-popular="1" data-price="20000">
+  <img src="kẹo socola/Sôcôla không đắng cũng không ngọt.jpg" alt="Sôcôla không đắng cũng không ngọt">
+  <h4>Sôcôla không đắng cũng không ngọt</h4>
+  <p>20.000đ</p>
+</div>
+
+<div class="card-candy"  data-name="Sôcôla ngọt hơn đường mía" data-category="kẹo socola" data-popular="1" data-price="20000">
+  <img src="kẹo socola/Sôcôla ngọt hơn đường mía.jpg" alt="Sôcôla ngọt hơn đường mía">
+  <h4>Sôcôla ngọt hơn đường mía</h4>
+  <p>20.000đ</p>
+</div>
+
+<div class="card-candy"  data-name="thanh choco hạt dẻ" data-category="kẹo socola" data-popular="1" data-price="20000">
+  <img src="kẹo socola/thanh choco hạt dẻ.jpg" alt="thanh choco hạt dẻ">
+  <h4>thanh choco hạt dẻ</h4>
+  <p>20.000đ</p>
+</div>
+
+
+<div class="card-candy"  data-name="Dừa nâu bến tre" data-category="kẹo truyền thống" data-popular="1" data-price="20000">
+  <img src="kẹo truyền thống/Dừa nâu bến tre.jpg" alt="Dừa nâu bến tre">
+  <h4>Dừa nâu bến tre</h4>
+  <p>20.000đ</p>
+</div>
+
+<div class="card-candy"  data-name="Dừa xanh bến tre" data-category="kẹo truyền thống" data-popular="1" data-price="20000">
+  <img src="kẹo truyền thống/Dừa xanh bến tre.jpg" alt="Dừa xanh bến tre">
+  <h4>Dừa xanh bến tre</h4>
+  <p>20.000đ</p>
+</div>
+
+<div class="card-candy"  data-name="Giọt nước chu sa" data-category="kẹo truyền thống" data-popular="1" data-price="20000">
+  <img src="kẹo truyền thống/Giọt nước chu sa.jpg" alt="Giọt nước chu sa">
+  <h4>Giọt nước chu sa</h4>
+  <p>20.000đ</p>
+</div>
+
+<div class="card-candy"  data-name="Kẹo chỉ Sài Gòn" data-category="kẹo truyền thống" data-popular="1" data-price="20000">
+  <img src="kẹo truyền thống/Kẹo chỉ Sài Gòn.jpg" alt="Kẹo chỉ Sài Gòn">
+  <h4>Kẹo chỉ Sài Gòn</h4>
+  <p>20.000đ</p>
+</div>
+
+<div class="card-candy"  data-name="Kẹo cu đơ" data-category="kẹo truyền thống" data-popular="1" data-price="20000">
+  <img src="kẹo truyền thống/Kẹo cu đơ.jpg" alt="Kẹo cu đơ">
+  <h4>Kẹo cu đơ</h4>
+  <p>20.000đ</p>
+</div>
+
+<div class="card-candy"  data-name="Kẹo dồi nhưng không có dồi" data-category="kẹo truyền thống" data-popular="1" data-price="20000">
+  <img src="kẹo truyền thống/Kẹo dồi nhưng không có dồi.jpg" alt="Kẹo dồi nhưng không có dồi">
+  <h4>Kẹo dồi nhưng không có dồi</h4>
+  <p>20.000đ</p>
+</div>
+
+<div class="card-candy"  data-name="Kẹo dừa nhiều vị" data-category="kẹo truyền thống" data-popular="1" data-price="20000">
+  <img src="kẹo truyền thống/Kẹo dừa nhiều vị.jpg" alt="Kẹo dừa nhiều vị">
+  <h4>Kẹo dừa nhiều vị</h4>
+  <p>20.000đ</p>
+</div>
+
+<div class="card-candy"  data-name="Kẹo gừng Huế" data-category="kẹo truyền thống" data-popular="1" data-price="20000">
+  <img src="kẹo truyền thống/Kẹo gừng Huế.jpg" alt="Kẹo gừng Huế">
+  <h4>Kẹo gừng Huế</h4>
+  <p>20.000đ</p>
+</div>
+
+<div class="card-candy"  data-name="Kẹo lạc vào trái tym em" data-category="kẹo truyền thống" data-popular="1" data-price="20000">
+  <img src="kẹo truyền thống/Kẹo lạc vào trái tym em.jpg" alt="Kẹo lạc vào trái tym em">
+  <h4>Kẹo lạc vào trái tym em</h4>
+  <p>20.000đ</p>
+</div>
+
+<div class="card-candy"  data-name="Lạc rang giúp bạn không lạc lối" data-category="kẹo truyền thống" data-popular="1" data-price="20000">
+  <img src="kẹo truyền thống/Lạc rang giúp bạn không lạc lối.jpg" alt="Lạc rang giúp bạn không lạc lối">
+  <h4>Lạc rang giúp bạn không lạc lối</h4>
+  <p>20.000đ</p>
+</div>
+
+<div class="card-candy"  data-name="Mứt dừa xứ Huế" data-category="kẹo truyền thống" data-popular="1" data-price="20000">
+  <img src="kẹo truyền thống/Mứt dừa xứ Huế.jpg" alt="Mứt dừa xứ Huế">
+  <h4>Mứt dừa xứ Huế</h4>
+  <p>20.000đ</p>
+</div>
+
+
+
+
+  </div>
+
+<div id="results" style="padding-top: 3rem;"></div>
+
+
+<script>
+  // Chỉ giữ lại phần này nếu bạn muốn thêm điều hướng sau này
+  function goToProduct(value) {
+    if (value) {
+      window.location.href = value + ".html";
+    }
+  }
+</script>
+
+
+<script>
+const toggleBtn = document.getElementById("toggle-filter");
+const filterBox = document.getElementById("advanced-filter");
+const applyBtn = document.querySelector(".apply-filter");
+
+toggleBtn.addEventListener("click", function () {
+  if (filterBox.classList.contains("show")) {
+    filterBox.classList.remove("show");
+    setTimeout(() => {
+      filterBox.style.display = "none";
+    }, 300);
+  } else {
+    filterBox.style.display = "block";
+    setTimeout(() => {
+      filterBox.classList.add("show");
+    }, 10);
+  }
+});
+
+// ✅ Tự động ẩn bộ lọc sau khi nhấn "Áp dụng"
+applyBtn.addEventListener("click", function () {
+  filterBox.classList.remove("show");
+  setTimeout(() => {
+    filterBox.style.display = "none";
+  }, 300);
+});
+</script>
+
+
+
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const sortSelect = document.getElementById("sort-options");
+  const typeSelect = document.getElementById("type-options");
+  const productGrid = document.getElementById("product-grid");
+  const applyBtn = document.querySelector(".apply-filter");
+
+  // ✅ Lưu bản gốc các sản phẩm để phục vụ lọc lại sau này
+  const originalProducts = Array.from(document.querySelectorAll(".card-candy")).map(product => product.cloneNode(true));
+
+  applyBtn.addEventListener("click", function () {
+    const sortValue = sortSelect.value;
+    const typeValue = typeSelect.value;
+
+    // Sử dụng bản sao gốc thay vì sản phẩm hiện tại trên trang
+    let filtered = [...originalProducts];
+
+    // Lọc theo loại
+    if (typeValue !== "all") {
+      filtered = filtered.filter(product =>
+        product.getAttribute("data-category") === typeValue
+      );
+
+    }
+
+    // Sắp xếp
+    if (sortValue === "price-asc") {
+      filtered.sort((a, b) =>
+        parseInt(a.getAttribute("data-price")) - parseInt(b.getAttribute("data-price"))
+      );
+    } else if (sortValue === "az") {
+      filtered.sort((a, b) => {
+        const nameA = a.getAttribute("data-name").toLowerCase();
+        const nameB = b.getAttribute("data-name").toLowerCase();
+        return nameA.localeCompare(nameB);
+      });
+    } else if (sortValue === "popular") {
+      filtered.sort((a, b) =>
+        parseInt(b.getAttribute("data-popular")) - parseInt(a.getAttribute("data-popular"))
+      );
+    }
+
+    // Xóa và hiển thị sản phẩm mới
+    productGrid.innerHTML = "";
+
+    if (filtered.length > 0) {
+      filtered.forEach(product => productGrid.appendChild(product));
+    } else {
+      // Hiển thị thông báo nếu không có sản phẩm nào khớp
+      const msg = document.createElement("p");
+      msg.textContent = "Không tìm thấy sản phẩm phù hợp.";
+      productGrid.appendChild(msg);
+    }
+  });
+});
+</script>
+
+
+
+
+
+
+
+
+ <script>
+  const originalProducts = [];
+
+  // Lấy query từ URL
+  function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    // Sao lưu toàn bộ sản phẩm gốc
+    document.querySelectorAll(".card-candy").forEach(card => {
+      originalProducts.push(card.cloneNode(true));
+    });
+
+    // Lấy query từ URL nếu có
+    const query = getQueryParam("query");
+    if (query) {
+      document.getElementById("search-input").value = query;
+      searchCandy(query);
+    } else {
+      renderProducts(originalProducts);
+    }
+
+    // Gắn sự kiện Enter
+    document.getElementById("search-input").addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        searchCandy();
+      }
+    });
+  });
+
+  function searchCandy(customQuery = null) {
+    const keyword = (customQuery || document.getElementById("search-input").value).toLowerCase().trim();
+    const keywordList = keyword.split(" ").filter(k => k);
+
+    if (keywordList.length === 0) {
+      renderProducts(originalProducts);
+      return;
+    }
+
+    const matched = originalProducts.filter(product => {
+      const name = product.getAttribute("data-name")?.toLowerCase() || "";
+      const category = product.getAttribute("data-category")?.toLowerCase() || "";
+      return keywordList.every(kw =>
+        name.includes(kw) || category.includes(kw)
+      );
+    });
+
+    const remaining = originalProducts.filter(p => !matched.includes(p));
+    renderProducts(matched, remaining);
+  }
+
+ 
+</script>
+
+
+
+
+
+
+<div id="cart-bar" style="
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #ff4081;
+  color: white;
+  padding: 12px 20px;
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 -4px 10px rgba(0,0,0,0.2);
+  z-index: 9999;
+">
+  <span id="cart-count">Đã chọn 0 sản phẩm</span>
+  <button style="
+    background: white;
+    color: #ff4081;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+  ">
+    <a href="taikhoan.html" style="text-decoration: none; color:#ff4081 ;"> 🛒 Mua hàng</a>
+  </button>
+</div>
+
+<script>
+const selectedProducts = new Set();
+
+
+function updateCartBar() {
+  const cartBar = document.getElementById("cart-bar");
+  const cartCount = document.getElementById("cart-count");
+  const count = selectedProducts.size;
+
+   
+  if (count > 0) {
+    cartBar.style.display = "flex";
+    cartCount.textContent = `Đã chọn ${count} sản phẩm`;
+  } else {
+    cartBar.style.display = "none";
+  }
+}
+
+function toggleProductSelection(card) {
+  const name = card.getAttribute("data-name");
+  if (selectedProducts.has(name)) {
+    selectedProducts.delete(name);
+    card.classList.remove("selected");
+  } else {
+    selectedProducts.add(name);
+    card.classList.add("selected");
+  }
+  updateCartBar();
+}
+
+document.addEventListener("click", function (e) {
+  if (e.target.closest(".card-candy")) {
+    const card = e.target.closest(".card-candy");
+    toggleProductSelection(card);
+  }
+});
+
+// Khi hiển thị sản phẩm mới → vẫn giữ sản phẩm đã chọn được đánh dấu lại
+
+function renderProducts(products, suggestions = []) {
+  const productGrid = document.getElementById('product-grid');
+  const noResult = document.getElementById("no-result");
+  productGrid.innerHTML = '';
+
+  // Hiển thị sản phẩm phù hợp
+  if (products.length > 0) {
+    products.forEach(p => {
+      const cloned = p.cloneNode(true);
+      const name = cloned.getAttribute("data-name");
+      if (selectedProducts.has(name)) {
+        cloned.classList.add("selected");
+      }
+      productGrid.appendChild(cloned);
+    });
+    if (noResult) noResult.style.display = "none";
+  } else {
+    if (noResult) noResult.style.display = "block";
+  }
+
+  // Nếu có đề xuất
+  if (suggestions.length > 0) {
+    const suggestionTitle = document.createElement('h2');
+    suggestionTitle.textContent = "Sản phẩm đề xuất";
+    suggestionTitle.className = "section-title";
+
+    const suggestionWrapper = document.createElement('div');
+    suggestionWrapper.className = 'suggestion-wrapper';
+
+    suggestions.forEach(p => {
+      const cloned = p.cloneNode(true);
+      const name = cloned.getAttribute("data-name");
+      if (selectedProducts.has(name)) {
+        cloned.classList.add("selected");
+      }
+      suggestionWrapper.appendChild(cloned);
+    });
+
+    productGrid.appendChild(suggestionTitle);
+    productGrid.appendChild(suggestionWrapper);
+  }
+
+  updateCartBar();
+}
+
+</script>
+
+
+</body>
+<footer class="footer">
+  <div class="footer-column">
+    <h3>Thông tin liên hệ</h3>
+    <p>📧 Gmail: keoj@example.com</p>
+    <p>📞 SĐT: 0123 456 789</p>
+    <p>📍 Địa chỉ: 123 Kẹo Ngọt, TP.HCM</p>
+  </div>
+  <div class="footer-column" style="font-size: 2rem;">
+    <p>@KEOJ</p>
+    <p>Made by <br><i>Thanh Thanh - Tâm Như - Quỳnh Trang</i></p>
+  </div>
+
+</footer>
+</html>

@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Trang chủ</title>
+		<link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Twinkle+Star&display=swap&subset=vietnamese" rel="stylesheet">
+
+  <style>
+   * {
+      box-sizing: border-box;
+      font-family: 'Twinkle Star', sans-serif;
+    }
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: url('Screenshot 2025-04-11 141845.png') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 30px;
+      background-color: #c30a07;
+      border: none; /* Đường viền nhạt */
+      position: relative;
+      z-index: 1000;
+      box-shadow: 0 8px 15px #c30a07;
+    }
+
+    .logo img {
+      height: 40px; /* chỉnh kích thước logo */
+    }
+
+     .search-bar {
+  display: flex;
+  justify-content: center;
+}
+
+.search-bar form {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden; /* Làm liền khối */
+  background-color: white;
+}
+
+.search-bar input[type="text"] {
+  width: 30rem;
+  padding: 10px 12px;
+  font-size: 16px;
+  border: none;
+  outline: none;
+}
+
+.search-bar button {
+  padding: 0 16px;
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #0a0a23;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #f60; /* Màu cam khi hover giống hình bạn gửi */
+    }
+
+    /* Responsive nhỏ gọn hơn */
+    @media screen and (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 15px;
+      }
+
+      .search-bar input[type="text"] {
+        width: 100%;
+      }
+
+      .nav-links {
+        justify-content: center;
+        margin-top: 10px;
+      }
+    }
+
+.category { 
+      margin: 0;
+      padding: 40px;
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    
+}
+  .card-category {
+      display: flex;
+      width: 100%;
+      max-width: 800px;
+      height: 250px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      background: white;
+      margin-bottom: 2rem;
+    }
+
+    .image-category-left, .image-category-right {
+      width: 50%;
+      height: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .image-category-left img, .image-category-right img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .image-category-left {
+      clip-path: ellipse(100% 100% at 0% 50%);
+    }
+
+    .image-category-right {
+      clip-path: ellipse(100% 100% at 100% 50%);
+    }
+
+    .text-category {
+      width: 50%;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #333;
+      text-align: center;
+    }
+
+    .text-category-content {
+      max-width: 100%;
+    }
+
+    /* Mobile responsive */
+    @media (max-width: 768px) {
+      .card-category {
+        flex-direction: column;
+        height: auto;
+      }
+
+      .image-category-left, .image-category-right {
+        width: 100%;
+        height: 150px;
+        clip-path: ellipse(100% 100% at 50% 0%);
+      }
+
+      
+
+     .image-category-left,
+      .image-category-right {
+        width: 100%;
+        height: 150px;
+        clip-path: ellipse(100% 100% at 50% 0%);
+        
+      }
+
+      
+      .image-category-right {
+      
+        clip-path: ellipse(100% 100% at 50% 100%);
+        transform: rotate(180deg); /* Lộn ngược ảnh bên phải */
+        transform-origin: center; /* Xoay từ trung tâm */
+        order:-1;
+        }
+
+     
+
+
+      .text-category {
+        width: 100%;
+        padding: 15px;
+      }
+}
+.footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background-color: #fddede;
+    padding: 20px 40px;
+    color: #5c2e2e;
+    font-family: Arial, sans-serif;
+  }
+
+  .footer-column {
+    flex: 1;
+    min-width: 200px;
+    margin: 10px;
+  }
+
+  .footer-column h3 {
+    margin-bottom: 10px;
+  }
+
+  .footer-column p {
+    margin: 6px 0;
+  }
+
+  @media screen and (max-width: 600px) {
+    .footer {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .footer-column {
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+  .menu {
+      position: relative;
+      display: inline-block;
+    }
+
+   
+       
+
+    /* Danh sách thả xuống */
+    .dropdown {
+      display: none;
+      position: absolute;
+      background-color: white;
+      box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+      min-width: 160px;
+      z-index: 1;
+    }
+
+    /* Các mục con */
+    .dropdown a {
+      display: block;
+      padding: 12px 16px;
+      color: black;
+      text-decoration: none;
+    }
+
+    .dropdown a:hover {
+      background-color: #f1f1f1;
+    }
+
+    /* Khi hover vào menu, hiển thị dropdown */
+    .menu:hover .dropdown {
+      display: block;
+    }
+
+
+.buy-now {
+      display: inline-block;
+      padding: 8px 12px;
+      background-color: red;
+      color: white;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 18px;
+      transition: transform 0.3s ease;
+    }
+
+    .buy-now:hover {
+      transform: scale(1.1);
+    }
+
+</style>
+	</head>
+
+	<body>
+		<div class="navbar">
+    <div class="logo">
+      <a href="TRANG CHỦ Ở ĐÂY.html"><img src="Screenshot 2025-04-11 135054.png" alt="Logo"></a>
+    </div>
+
+    <div class="search-bar">
+      <form action="muahang.html" method="get">
+        <input type="text" id="search-input" name="query" placeholder="Tìm kiếm..." autocomplete="off">
+        <button type="submit">🔎</button>
+      </form>
+    </div>
+
+    <div class="nav-links">
+      <div class="menu">
+    <a href="cacloaikeo.html"><div>Các loại kẹo</div></a>
+    <div class="dropdown">
+          <a href="muahang.html?query=kẹo cứng">Kẹo cứng</a>
+          <a href="muahang.html?query=kẹo mềm">Kẹo mềm</a>
+          <a href="muahang.html?query=kẹo socola">Kẹo socola</a>
+          <a href="muahang.html?query=kẹo truyền thống">Kẹo truyền thống</a>
+        </div>
+  </div>
+      <a href="muahang.html">Mua hàng</a>
+      <a href="taikhoan.html">Tài khoản</a>
+      <a href="doitrahang.html">Đổi/Trả hàng</a>
+      
+  
+    </div>
+  </div>
+
+
+<!-- Thẻ với ảnh nửa hình tròn bên trái -->
+<div class="category">
+	<div class="card-category">
+  <div class="image-category-left">
+    <img src="keocungbia.jpg" alt="Kẹo cứng">
+  </div>
+  <div class="text-category">
+    <div class="text-category-content">
+      <h3>Kẹo cứng</h3>
+      <p style="text-align: left;">Kẹo cứng KEOJ mang vị ngọt thanh, giòn tan và thơm dịu. Từng viên được chế tác thủ công, giữ trọn hương vị truyền thống. Dùng để nhâm nhi, làm quà hoặc đơn giản là lưu giữ chút ngọt ngào giữa những phút giây thường nhật.</p>
+      <a href="muahang.html?query=kẹo cứng" class="buy-now">Mua ngay</a>
+    </div>
+  </div>
+</div>
+
+<!-- Thẻ với ảnh nửa hình tròn bên phải -->
+<div class="card-category">
+  <div class="text-category">
+    <div class="text-category-content">
+      <h3>Kẹo mềm</h3>
+      <p style="text-align: left;">Kẹo mềm KEOJ dẻo mịn, ngọt nhẹ, tan ngay trên đầu lưỡi. Với lớp vỏ tinh tế và hương vị hài hòa, từng viên là lời thủ thỉ ngọt ngào, mang đến cảm giác dịu êm như một cái ôm nhỏ.
+
+</p>
+      <a href="muahang.html?query=kẹo mềm" class="buy-now">Mua ngay</a>
+    </div>
+  </div>
+  <div class="image-category-right">
+    <img src="keomembia.jpg" alt="Kẹo mềm">
+  </div>
+</div>
+
+  <div class="card-category">
+  <div class="image-category-left">
+    <img src="keocungbia.jpg" alt="Kẹo socola">
+  </div>
+  <div class="text-category">
+    <div class="text-category-content">
+      <h3>Kẹo socola</h3>
+      <p style="text-align: left;">Kẹo socola KEOJ đậm vị, quyện giữa vị đắng nhẹ và ngọt béo tinh tế. Lớp vỏ mượt mà ôm lấy nhân thơm, khiến mỗi lần thưởng thức như một chuyến hành trình qua những xúc cảm sâu lắng.
+
+</p>
+      <a href="muahang.html?query=kẹo socola" class="buy-now">Mua ngay</a>
+    </div>
+  </div>
+</div>
+
+<!-- Thẻ với ảnh nửa hình tròn bên phải -->
+<div class="card-category">
+  <div class="text-category">
+    <div class="text-category-content">
+      <h3>Kẹo truyền thống</h3>
+      <p style="text-align: left;">Gói trong lớp giấy đơn sơ, kẹo truyền thống KEOJ lưu giữ hương vị xưa cũ. Mộc mạc, thân quen và đầy hoài niệm, viên kẹo nhỏ gợi nhắc về tuổi thơ và những buổi chiều vàng bên hiên nhà.
+
+</p>
+      <a href="muahang.html?query=kẹo truyền thống" class="buy-now">Mua ngay</a>
+    </div>
+  </div>
+  <div class="image-category-right">
+    <img src="keomembia.jpg" alt="Kẹo truyền thống">
+  </div>
+</div>
+</div>
+
+<script>
+function searchCandy() {
+    const keyword = document.getElementById("search-input").value.toLowerCase();
+    if (keyword) {
+      window.location.href = `muahang.html?query=${encodeURIComponent(keyword)}`;
+    }
+  }
+
+  document.getElementById("search-input").addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+      searchCandy();
+    }
+</script>
+
+	</body>
+	<footer class="footer">
+  <div class="footer-column">
+    <h3>Thông tin liên hệ</h3>
+    <p>📧 Gmail: keoj@example.com</p>
+    <p>📞 SĐT: 0123 456 789</p>
+    <p>📍 Địa chỉ: 123 Kẹo Ngọt, TP.HCM</p>
+  </div>
+  <div class="footer-column" style="font-size: 2rem;">
+    <p>@KEOJ</p>
+    <p>Made by <br><i>Thanh Thanh - Tâm Như - Quỳnh Trang</i></p>
+  </div>
+
+</footer>
+</html>
+

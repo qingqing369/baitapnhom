@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <title>Trang chủ</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Twinkle+Star&display=swap&subset=vietnamese" rel="stylesheet">
+  <!-- Flatpickr CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Twinkle Star', sans-serif;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    body {
+      background: url('Screenshot 2025-04-11 141845.png') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    main {
+      flex: 1;
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 30px;
+      background-color: #c30a07;
+      box-shadow: 0 8px 15px #c30a07;
+    }
+
+    .logo img {
+      height: 40px;
+    }
+
+    .search-bar {
+      display: flex;
+      justify-content: center;
+    }
+
+    .search-bar form {
+      display: flex;
+      align-items: center;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      overflow: hidden;
+      background-color: white;
+    }
+
+    .search-bar input[type="text"] {
+      width: 30rem;
+      padding: 10px 12px;
+      font-size: 16px;
+      border: none;
+      outline: none;
+    }
+
+    .search-bar button {
+      padding: 0 16px;
+      background-color: white;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #0a0a23;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #f60;
+    }
+
+    @media screen and (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 15px;
+      }
+
+      .search-bar input[type="text"] {
+        width: 100%;
+      }
+
+      .nav-links {
+        justify-content: center;
+        margin-top: 10px;
+      }
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-top: 40px;
+    }
+
+    .form-wrapper {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 30px;
+      background-color: rgba(255, 255, 255, 0.95);
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .form-wrapper label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+      color: #222;
+    }
+
+    .form-wrapper input,
+    .form-wrapper textarea {
+      width: 100%;
+      padding: 12px;
+      margin-top: 6px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+
+    .form-wrapper textarea {
+      resize: vertical;
+    }
+
+    .form-wrapper button {
+      margin-top: 25px;
+      padding: 12px 25px;
+      background-color: #28a745;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.3s;
+    }
+
+    .form-wrapper button:hover {
+      background-color: #218838;
+    }
+
+    .thank-you-message {
+      text-align: center;
+      color: green;
+       align-items: center;     /* Căn giữa theo chiều dọc */
+      font-weight: bold;
+      padding: ;
+      display: none;
+    }
+
+    footer {
+      background-color: #fcdede;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .footer-column {
+      flex: 1;
+      min-width: 250px;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="logo">
+      <a href="TRANG CHỦ Ở ĐÂY.html"><img src="Screenshot 2025-04-11 135054.png" alt="Logo"></a>
+    </div>
+
+    <div class="search-bar">
+      <form action="muahang.html" method="get">
+        <input type="text" name="query" placeholder="Tìm kiếm..." autocomplete="off">
+        <button type="submit">🔎</button>
+      </form>
+    </div>
+
+    <div class="nav-links">
+      <div class="menu">
+        <a href="cacloaikeo.html"><div>Các loại kẹo</div></a>
+        <div class="dropdown">
+          <a href="muahang.html?query=kẹo cứng">Kẹo cứng</a>
+          <a href="muahang.html?query=kẹo mềm">Kẹo mềm</a>
+          <a href="muahang.html?query=kẹo socola">Kẹo socola</a>
+          <a href="muahang.html?query=kẹo truyền thống">Kẹo truyền thống</a>
+        </div>
+      </div>
+      <a href="muahang.html">Mua hàng</a>
+      <a href="taikhoan.html">Tài khoản</a>
+      <a href="doitrahang.html">Đổi/Trả hàng</a>
+    </div>
+  </div>
+
+  <main>
+    <h2>Đăng Ký Thông Tin Cá Nhân</h2>
+
+    <div class="form-wrapper" id="formContainer">
+      <form id="registerForm">
+        <label for="hoten">Họ và tên</label>
+        <input type="text" id="hoten" name="hoten" placeholder="Nhập họ và tên" required>
+
+        <label for="sodt">Số điện thoại</label>
+        <input type="tel" id="sodt" name="sodt" placeholder="Nhập số điện thoại" required>
+
+        <label for="mail">Email</label>
+        <input type="email" id="mail" name="mail" placeholder="Nhập email" required>
+
+        <label for="ngaysinh">Ngày tháng năm sinh</label>
+       <input type="text" id="ngaysinh" name="ngaysinh" required placeholder="dd/mm/yyyy">
+
+
+
+        <label for="diachi">Địa chỉ giao hàng</label>
+        <textarea id="diachi" name="diachi" placeholder="Nhập địa chỉ cụ thể" rows="4" required></textarea>
+
+        <button type="submit">Đăng Ký</button>
+      </form>
+
+      <div class="thank-you-message" id="thankYou">
+        🎉 Cảm ơn bạn đã đăng ký! Chúng tôi sẽ liên hệ sớm nhất!
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-column">
+      <h3>Thông tin liên hệ</h3>
+      <p>📧 Gmail: keoj@example.com</p>
+      <p>📞 SĐT: 0123 456 789</p>
+      <p>📍 Địa chỉ: 123 Kẹo Ngọt, TP.HCM</p>
+    </div>
+    <div class="footer-column" style="font-size: 2rem;">
+      <p>@KEOJ</p>
+      <p>Made by <br><i>Thanh Thanh - Tâm Như - Quỳnh Trang</i></p>
+    </div>
+  </footer>
+
+  <script>
+    const form = document.getElementById("registerForm");
+    const thankYou = document.getElementById("thankYou");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault(); // Ngăn gửi form đi
+      form.style.display = "none";
+      thankYou.style.display = "block";
+
+      // Giữ chiều cao khối wrapper để không làm tụt footer
+      document.getElementById("formContainer").style.minHeight = "85px";
+    });
+
+
+
+
+  </script>
+
+<!-- Flatpickr JS -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/vn.js"></script>
+
+<script>
+  flatpickr("#ngaysinh", {
+    dateFormat: "d/m/Y",
+    locale: "vn",
+    maxDate: "today"
+  });
+</script>
+
+
+</body>
+</html>

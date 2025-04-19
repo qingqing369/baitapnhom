@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Đổi/Trả hàng | Kẹo Ngon</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css"/>
+  
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Twinkle+Star&display=swap&subset=vietnamese" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Twinkle Star', cursive;
+    }
+
+    .bg-red-custom {
+      background-color: #ff5757;
+    }
+
+    .text-red-custom {
+      color: #ff5757;
+    }
+
+    .hover\:bg-red-hover:hover {
+      background-color: #ff4444;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+  <!-- Header -->
+  <header class="bg-red-custom text-white p-4 text-center text-2xl font-bold">
+    Trang Yêu Cầu Đổi / Trả Hàng
+  </header>
+
+  <main class="max-w-4xl mx-auto p-6 bg-white mt-6 rounded-xl shadow-md mb-10">
+
+    <!-- Hướng dẫn -->
+    <section class="mb-8">
+      <h2 class="text-xl font-bold text-red-custom mb-4">🎁 Hướng dẫn đổi/trả</h2>
+      <ul class="list-disc list-inside space-y-1 text-gray-700">
+        <li>Chỉ áp dụng đổi/trả trong vòng <strong>3 ngày</strong> kể từ khi nhận hàng.</li>
+        <li>Sản phẩm bị lỗi, hư hỏng hoặc giao sai mẫu.</li>
+        <li>Vui lòng cung cấp hình ảnh/video để xác nhận tình trạng hàng hóa.</li>
+      </ul>
+    </section>
+
+    <!-- Form gửi yêu cầu -->
+    <form class="space-y-6" id="returnForm">
+      <div>
+        <label class="block font-medium mb-1" for="orderCode">Mã đơn hàng *</label>
+        <input type="text" id="orderCode" name="orderCode" required class="w-full p-2 border rounded-md" placeholder="VD: DH12345678" />
+      </div>
+
+      <div>
+        <label class="block font-medium mb-1" for="reason">Lý do đổi/trả *</label>
+        <select id="reason" name="reason" required class="w-full p-2 border rounded-md">
+          <option value="">-- Chọn lý do --</option>
+          <option value="damaged">Hàng bị hư hỏng</option>
+          <option value="wrong-item">Giao sai sản phẩm</option>
+          <option value="expired">Hàng hết hạn</option>
+          <option value="other">Khác</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="block font-medium mb-1" for="description">Mô tả chi tiết *</label>
+        <textarea id="description" name="description" rows="4" required class="w-full p-2 border rounded-md" placeholder="Mô tả tình trạng sản phẩm..."></textarea>
+      </div>
+
+      <div>
+        <label class="block font-medium mb-2" for="images">Hình ảnh đính kèm (tối đa 3 ảnh)</label>
+        <input type="file" id="images" name="images" accept="image/*" multiple class="mb-2" onchange="previewImages()" />
+        <div id="preview" class="flex gap-2 flex-wrap"></div>
+      </div>
+
+      <!-- Nút gửi yêu cầu -->
+      <button type="submit" class="bg-red-custom text-white px-6 py-2 rounded-md hover:bg-red-hover transition">
+        Gửi yêu cầu
+      </button>
+
+      <!-- Nút về trang chủ -->
+      <div class="text-center mt-8">
+        <a href="TRANG CHỦ Ở ĐÂY.html" class="inline-block bg-gray-200 text-gray-800 px-6 py-2 rounded-md hover:bg-gray-300 transition">
+          ⬅️ Về trang chủ
+        </a>
+      </div>
+    </form>
+  </main>
+
+  <!-- Script xem trước hình ảnh -->
+  <script>
+    function previewImages() {
+      const preview = document.getElementById('preview');
+      preview.innerHTML = '';
+      const files = document.getElementById('images').files;
+
+      Array.from(files).slice(0, 3).forEach(file => {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const img = document.createElement('img');
+          img.src = e.target.result;
+          img.className = "w-24 h-24 object-cover rounded-md border";
+          preview.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    document.getElementById('returnForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert("Yêu cầu của bạn đã được gửi! Chúng tôi sẽ phản hồi sớm.");
+      this.reset();
+      document.getElementById('preview').innerHTML = '';
+    });
+  </script>
+
+</body>
+<footer class="footer">
+  <div class="footer-column">
+    <h3>Thông tin liên hệ</h3>
+    <p>📧 Gmail: keoj@example.com</p>
+    <p>📞 SĐT: 0123 456 789</p>
+    <p>📍 Địa chỉ: 123 Kẹo Ngọt, TP.HCM</p>
+  </div>
+  <div class="footer-column" style="font-size: 2rem;">
+    <p>@KEOJ</p>
+    <p>Made by <br><i>Thanh Thanh - Tâm Như - Quỳnh Trang</i></p>
+  </div>
+
+</footer>
+</html>
